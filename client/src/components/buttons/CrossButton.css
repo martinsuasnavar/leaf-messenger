@@ -1,0 +1,14 @@
+.cross-button{
+    width: 40px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.cross-button:hover{
+    background-color: red;
+    color: white;
+}
+
+.cross-button:active{
+    background-color: darkred;
+}

@@ -1,0 +1,208 @@
+#messenger * {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  #messenger html,
+  body {
+    height: 100%;
+  }
+  
+  #messenger html {
+    background: black;
+    font-size: 10px;
+  }
+  
+  #messenger body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+ 
+.topbar{
+    position: fixed;
+    display: flex;
+    height: 30px;
+    width: 100%;
+}
+
+.topbar-room-name{
+    background-color: white;
+    flex-basis: 200px;
+    font-size: 1.2rem;
+    padding: 5px;
+    font-weight: 500;
+    color: var(--main-color);
+}
+
+.topbar-blank-space{
+    background-color: white; 
+    width: 100%;
+}
+
+  #chat-container {
+    display: flex;
+    flex-grow: 1;
+    width: 100vw;
+    height: 100vh;
+    background: #fff;
+    border-radius: 0px;
+  }
+  
+  #side-bar {
+    background-image: url('../../../public/chatusers-background.png');
+    flex-basis: 200px;
+  }
+  @media (max-width: 655px){
+    #side-bar{
+        flex-basis: 0px;
+    }
+}
+  #chat-window {
+    padding: 10px;
+    background-image: url('../../../public/chatboard-background.png');
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column; /* Stack chat messages and send area vertically */
+    justify-content: space-between; /* Distribute space evenly between messages and send area */
+  }
+  
+  .messages-rows {
+    overflow-y: auto; /* Enable vertical scrolling for messages */
+   
+}
+  
+  #send-area {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    justify-content: center; /* Align items horizontally */
+    padding: 10px;
+  }
+  
+  #send-area input {
+    height: 50px;
+    flex-grow: 1; /* Allow input to grow and fill available space */
+    margin-right: 10px; /* Add some space between input and button */
+  }
+  
+  #send-area button {
+    padding: 8px 16px;
+    border: none;
+    background: #007bff;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  
+/*
+.topbar{
+    display: flex;
+    height: 30px;
+}
+
+.topbar-room-name{
+    background-color: green; 
+    width: 290px; 
+    color: white; 
+    padding: 5px
+}
+
+.topbar-blank-bar{
+    background-color: white; 
+    width: 100%;
+}
+
+.chat-section{
+    height: 100vh;
+    display: flex;
+}
+
+.room-name-limit{
+    background-image: url('../../../public/roomname-background.png');
+}
+
+.users-box{
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin: auto;
+    color: black;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+#chat_sidebar{
+    position: 'relative';
+    width: 290px;
+    height: 100%;
+    background-image: url('../../../public/chatusers-background.png');
+}
+
+
+
+#chat_window{
+    z-index: 2;
+    overflow-y: visible;
+    width: 100%;
+    background-image: url('../../../public/chatboard-background.png');
+}
+
+@media (max-width: 655px){
+    .chat-users{
+    width: 0%;
+    }
+}
+
+.chat-board::-webkit-scrollbar {
+    
+    position: absolute;
+    z-index: 10;
+    background-color: #0000;;
+    width: 20px; 
+    height: 10px;
+}
+.chat-board::-webkit-scrollbar-thumb {
+    background: white;
+    height: 5px;
+  }
+
+.chat-board-messages{
+    padding: 10px;
+    
+}
+
+.chat-writeandsend{
+    position: 'absolute';
+    bottom: 0;
+    color: rgb(0, 0, 0);
+    height: 60px;
+    width: 300px;
+    background-color: white;
+}
+
+footer{
+    height:50px;
+    line-height:50px;
+    bottom:0;
+    left:0;
+    width:100%;
+    margin-top: 50px;
+    position: fixed;
+}
+
+input{
+    border: solid;
+    text-align: left;
+    width: 62%;
+    border-width: 2px;
+    border-radius: 2px;
+    border-color: var(--main-color);
+    box-shadow: none;
+}
+*/

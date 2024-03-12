@@ -1,0 +1,24 @@
+
+form{
+    color: var(--main-color);
+    font-weight: 500;
+    align-items: center;
+    justify-content: center;
+}
+
+
+input{
+    border: solid;
+    border-width: 2px;
+    border-radius: 2px;
+    border-color: var(--main-color);
+    box-shadow: none;
+}
+
+.login-text{
+    font-size: 3rem;
+    background: linear-gradient(90deg, rgba(0,223,205,1) 0%, rgba(0,200,180,1) 53%, rgba(0,82,68,1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 500;
+  }

@@ -1,0 +1,30 @@
+.generic-button {
+    border-radius: 10px;
+    margin: auto;
+
+    background-color: var(--main-color);
+    color: white;
+
+    position: relative;
+    display: flex;
+    flex-direction: row; /* Añadido para alinear en filas */
+    align-items: center;
+    justify-content: center;
+    
+    
+    cursor: pointer;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+    
+
+}
+
+
+.generic-button:hover{
+    filter: brightness(110%);
+}
+
+.generic-button:active{
+    filter: brightness(120%);
+}

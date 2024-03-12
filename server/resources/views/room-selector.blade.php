@@ -1,0 +1,1 @@
+<div id="root" data-csrf-token="{{ $csrfToken }}"></div>

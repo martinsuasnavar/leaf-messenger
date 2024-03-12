@@ -1,0 +1,42 @@
+/* variables */
+*{
+    overflow-y: visible;
+}
+
+:root{
+    --main-color: rgb(12, 198, 174);
+}
+
+/* classes */
+
+.header{
+    background-color: var(--main-color);
+    background-image: url('../public/header-background.png');
+    padding: 20px;
+    
+    justify-content: space-between;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    height: 70px;
+
+}
+
+.rooms-container{
+    display: flex;
+    flex-direction: row; /* Añadido para alinear en filas */
+    align-items: center;
+    justify-content: center;
+}
+
+.rooms {
+    border-width: 1.4px;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: var(--main-color);
+
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}

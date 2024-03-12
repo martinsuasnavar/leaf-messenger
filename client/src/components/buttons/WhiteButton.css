@@ -1,0 +1,26 @@
+.white-button {
+    border-radius: 10px;
+    margin: 20px;
+
+    background-color: white;
+    color: var(--main-color);
+    
+    display: flex;
+    flex-direction: row; /* Añadido para alinear en filas */
+    align-items: center;
+    justify-content: center;
+
+
+    cursor: pointer;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+
+.white-button:hover{
+    filter: brightness(110%);
+}
+
+.white-button:active{
+    filter: brightness(120%);
+}
