@@ -7,7 +7,7 @@ import GenericButton from '../buttons/GenericButton.jsx';
 import WhiteButton from '../buttons/WhiteButton.jsx';
 import { backendDomain, loggedUsername } from '../../global.js';
 import { userArray, loggedId } from '../../global.js';
-import Fetch from '../supports/Fetch/Fetch.jsx';
+import Fetch, { callApi } from '../supports/Fetch/Fetch.jsx';
 import Cookies from 'js-cookie';
 import DialogBox from '../containers/DialogBox.jsx';
 import CrossButton from '../buttons/CrossButton.jsx';
@@ -84,6 +84,12 @@ const RoomSelector = () => {
     }
     console.log(newRoomName);
     console.log(roomPassword);
+    /*await callApi(`${backendDomain}/create-room`, 'POST', {
+      room_id: roomCount,
+      room_name: newRoomName,
+      hoster_user_id: loggedId.value,  
+      password: roomPassword
+    })*/
       try {
         console.log('trying to create room...');
         const response = await fetch(`${backendDomain}/create-room`, {
@@ -92,6 +98,7 @@ const RoomSelector = () => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
+                room_id: roomCount,
                 room_name: newRoomName,
                 hoster_user_id: loggedId.value,  
                 password: roomPassword

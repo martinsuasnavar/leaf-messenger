@@ -14,8 +14,10 @@ class UserController extends Controller
 
     public function create(Request $request)
     {
+        echo "validating";
         // Validate the incoming request data
         $validatedData = $request->validate([
+            'id' => 'required|int',
             'username' => 'required|string',
             'password' => 'required|string',
         ]);

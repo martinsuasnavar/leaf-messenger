@@ -1,51 +1,40 @@
-// Fetch.jsx
-import React, { useState, useEffect } from 'react';
-
-const Fetch = ({ url, method = 'GET', body = null, headers = {} }) => {
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  const fetchData = async () => {
-    try {
-      let response = null;
-      switch (method) {
-        case 'GET':
-          response = await fetch(url);
+export const callApi = async (fetchURL, method, body) =>{
+  switch (method){
+      case 'GET':
+              try {
+                  const response = await fetch(fetchURL);
+                  const data = await response.json();
+                  return data;
+              } catch (error) {
+                      console.error("Failed to fetch:", error.message, `. FetchURL was ${fetchURL}`);
+                  return null;
+              }
           break;
-        case 'POST':
-          response = await fetch(url, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: body
-          });
+      case 'POST':
+      case 'PUT':
+              try {
+                  const response = await fetch(fetchURL, {
+                      method: method, 
+                      headers: {
+                          "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({body})
+                  });
+                  return response;
+          
+              } catch (error) {
+                  console.error("Failed to fetch:", error.message, `. FetchURL was ${fetchURL}`);
+                  return null;
+              }
           break;
-        // Aquí puedes agregar otros casos para PUT y DELETE si los necesitas
-        default:
+      case 'DELETE':
+              const response = await fetch(fetchURL, {
+                  method: 'DELETE'
+              });
+              return response;
           break;
-      }
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const result = await response.json();
-      setData(result);
-    } catch (error) {
-        fetchData();
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, [url, method, body, headers]);
-
-  // Devolver los datos, error, estado de carga y función createRoom
-  return { data, error, loading, createRoom: fetchData };
-};
-
-export default Fetch;
+      default:
+          console.error(`Invalid HTTP method. FetchURL was ${fetchURL}.`);
+          break;
+  }
+}

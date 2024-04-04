@@ -46,7 +46,7 @@ function App() {
       console.log('Session ID:', selectedSession.session_id);
       setLoggedUser(true);
       setLoggedUserId(selectedSession.associated_user_id);
-      const sessionUser = userArray.find(user => user.id === selectedSession.associated_user_id);
+      const sessionUser = userArray.find(user => user.id == selectedSession.associated_user_id);
       loggedUsername.value = sessionUser.username;
       loggedId.value = sessionUser.id;
     } else {

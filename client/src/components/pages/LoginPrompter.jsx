@@ -11,12 +11,14 @@ import { backendDomain } from "../../global";
 import { loggedUsername } from "../../global";
 import { userArray } from "../../global";
 
+
 import { useNavigate } from "react-router-dom";
+import { callApi } from "../supports/Fetch/Fetch";
 
 const LoginPrompter = () =>{
     const navigate = useNavigate();
 
-    const [users, setUsers] = useState(null);
+    const [users, setUsers] = useState([]);
 
     //login
     const [username, setUsername] = useState(null);
@@ -33,6 +35,9 @@ const LoginPrompter = () =>{
     //login error handling
     const [isLoginErrorActive, setLoginErrorState] = useState(false);
     const [loginErrorString, setLoginErrorString] = useState('');
+
+    //loading
+    const [isLoading, setLoading] = useState(true);
 
     const toggleSignUp = () => {
         setSignUp(!isSignUpActive);
@@ -60,40 +65,57 @@ const LoginPrompter = () =>{
         setSignUpMessage('Signing up...')
         fetchNewSignUp(username, password);
     }
+    
+    useEffect(() =>{
+        getUsers();
+    }, []);
+    
+    const getUsers = async ()  =>{
+        const data = await callApi(`${backendDomain}/users`, 'GET');
+        setUsers(data);
+        setLoading(false);
+    }
+
+    console.log("userArray lenght : " + users.length);
 
     const fetchNewSignUp = async (username, password) => {
-        const checkIfUsernameExists = userArray.find(user => user.username === username);
+        const checkIfUsernameExists = users.users.find(user => user.username == username);
         if (checkIfUsernameExists != null){
             setSignUpMessage('Failed to create account, username already exists');
             console.error("Failed to create account, username already exists");
         }else{
-            const response = await fetch(`${backendDomain}/create-user`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    username: username,
-                    password: password,
-                }),
-            })
-            const validPassword = password != null && !password.includes(' ');
-            const validUsername = username != null && Array.from(username)[0] != ' ';
-            const validCredentials = validPassword && validUsername;
-            if (validPassword == false){
-                setSignUpMessage('Invalid password');
-            }
-            if (validUsername == false){
-                setSignUpMessage('Invalid username');
-            }
-            if (validCredentials){
-                if (response.ok) {
-                    setSignUpMessage('Account created, now you can login with your data')
-                    console.log('Created a new account, saved sucessfully in database');
-                } else {
-                    setSignUpMessage('Failed to create account, API error');
-                    console.error("Failed to create account");
+            try{
+                const response = await fetch(`${backendDomain}/create-user`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        id: userArray.length,
+                        username: username,
+                        password: password,
+                    }),
+                })
+                const validPassword = password != null && !password.includes(' ');
+                const validUsername = username != null && Array.from(username)[0] != ' ';
+                const validCredentials = validPassword && validUsername;
+                if (validPassword == false){
+                    setSignUpMessage('Invalid password');
                 }
+                if (validUsername == false){
+                    setSignUpMessage('Invalid username');
+                }
+                if (validCredentials){
+                    if (response.ok) {
+                        setSignUpMessage('Account created, now you can login with your data')
+                        console.log('Created a new account, saved sucessfully in database');
+                    } else {
+                        setSignUpMessage('Failed to create account, API error');
+                    }
+                }
+            }
+            catch (error){
+                console.error("Failed to create account", error);
             }
         }
     };
@@ -116,12 +138,14 @@ const LoginPrompter = () =>{
 
     const logIn = async () =>{
         
-        const selectedUser = userArray.find(user => user.username === username);
+        const selectedUser = userArray.find(user => user.username == username);
  
         if (selectedUser != null){
-            console.log(selectedUser.username);
-            console.log(selectedUser.password);
-            if (password === selectedUser.password){
+            console.log("input username: " + username);
+            console.log("input password: " + password);
+            console.log("actual username: " + selectedUser.username);
+            console.log("actual password: " + selectedUser.password);
+            if (password == selectedUser.password){
                  console.log('Password is ok');
                  generateSessionId(selectedUser.id);
                  navigate('/');
@@ -163,7 +187,7 @@ const LoginPrompter = () =>{
             console.log('Logging in...');
             window.location.reload();
         } else {
-            console.error("ate session id");
+            console.error("Create session id");
         }
 
         /* do another fetch call to retrieve all sessions,
@@ -182,6 +206,7 @@ const LoginPrompter = () =>{
 
     return(
         <section>
+           
             {isSignUpActive ? (
             <DialogBox>
             <div style={{float: 'right'}}>
@@ -228,36 +253,40 @@ const LoginPrompter = () =>{
                     Chat for 24 hours
                 </div>
                 <WhiteSpace height={70} />
-                <form>
-                    <div>
-                        Username 
-                        <input required type='text' onChange={handleUsername}>
+                {!isLoading ? (
+                    <form>
+                        <div>
+                            Username 
+                            <input required type='text' onChange={handleUsername}>
+                            </input>
+                        </div>
+                        <WhiteSpace height={40} />
+                        Password 
+                        <input required type='text' onChange={handlePassword}>
                         </input>
-                    </div>
-                    <WhiteSpace height={40} />
-                    Password 
-                    <input required type='text' onChange={handlePassword}>
-                    </input>
-                    <div>
-                    {isLoginErrorActive ? (
-                        <div style={{color: 'red'}}>
-                            {loginErrorString}
+                        <div>
+                        {isLoginErrorActive ? (
+                            <div style={{color: 'red'}}>
+                                {loginErrorString}
+                            </div>
+                            ):(
+                            <div>
+                            </div>
+                        )}
+                        <WhiteSpace height={20}/>
+                    
+                        <GenericButton width={'100px'} onClick={logIn}>
+                            Log In
+                        </GenericButton>
+                    
+                        <a onClick={toggleSignUp} style={{cursor: 'pointer'}}>
+                            Haven't created an account? Sign up here
+                        </a>
                         </div>
-                        ):(
-                         <div>
-                        </div>
-                    )}
-                    <WhiteSpace height={20}/>
-                  
-                    <GenericButton width={'100px'} onClick={logIn}>
-                        Log In
-                    </GenericButton>
-                  
-                    <a onClick={toggleSignUp} style={{cursor: 'pointer'}}>
-                        Haven't created an account? Sign up here
-                    </a>
-                    </div>
-                </form>
+                    </form>
+                ):(
+                    <main className='login-text'><Image height={50} src="/loading.gif"></Image> </main>
+                )}
             </div>
         </section>
     );

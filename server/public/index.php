@@ -44,6 +44,7 @@ require __DIR__.'/../vendor/autoload.php';
 |
 */
 
+/*
 $app = require_once __DIR__.'/../bootstrap/app.php';
 
 $kernel = $app->make(Kernel::class);
@@ -53,3 +54,24 @@ $response = $kernel->handle(
 )->send();
 
 $kernel->terminate($request, $response);
+*/
+
+$isVercel = isset($_SERVER['VERCEL']);
+
+// Se estivermos na Vercel, configurar o caminho para o arquivo de bootstrap apropriado
+$bootstrapFile = $isVercel ? __DIR__.'/../bootstrap/app_vercel.php' : __DIR__.'/../bootstrap/app.php';
+
+// Carregar o arquivo de bootstrap apropriado
+$app = require_once $bootstrapFile;
+
+// Obter instância do Kernel
+$kernel = $app->make(Kernel::class);
+
+// Manipular a solicitação HTTP
+$response = $kernel->handle(
+    $request = Request::capture()
+)->send();
+
+// Finalizar a solicitação
+$kernel->terminate($request, $response);
+

@@ -8,9 +8,10 @@ import GenericButton from '../buttons/GenericButton';
 import { backendDomain } from '../../global';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { callApi } from '../supports/Fetch/Fetch';
+
 import { loggedId, userArray } from '../../global';
 import DialogBox from '../containers/DialogBox';
-
 
 const ChatRoom = () =>{
     const [rooms, setRooms] = useState([]);
@@ -37,15 +38,8 @@ const ChatRoom = () =>{
     }, []);
 
     const fetchMessages = async () =>{
-        try {
-            const response = await fetch(`${backendDomain}/messages`)
-            const data = await response.json(); // Response received
-            setMessages(data.messages);
-            //setLoading(false); // Stop loading
-        } catch (error) {
-            //setLoading(false); // Stop loading in case of error
-            console.error(error);
-        }
+        const data =  await callApi(`${backendDomain}/messages`, 'GET');
+        setMessages(data.messages);
     }
     const sendMessage = async () =>{
         console.log('Sending message with content ' + newMessage + '...')
@@ -55,8 +49,9 @@ const ChatRoom = () =>{
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
+                message_id: messages.length,
                 content: newMessage,
-                parent_room_id: id,
+                parent_room_id: parseInt(id),
                 messager_user_id: loggedId.value
             }),
         });

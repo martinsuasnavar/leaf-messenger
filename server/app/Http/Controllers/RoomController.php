@@ -18,6 +18,7 @@ class RoomController extends Controller
     {
         // Validate the incoming request data
         $validatedData = $request->validate([
+            'room_id' => 'required|int',
             'room_name' => 'required|string',
             'password' => 'required|string',
             'hoster_user_id' => 'required|int'
