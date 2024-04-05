@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\DB;
 
 // Database controllers
 use App\Http\Controllers\RoomController;
-
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\SessionController;
+use App\Http\Controllers\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,7 +55,7 @@ Route::delete('/api/delete-session/{session_id}', [SessionController::class, 'de
 
 //ROOMS/////////////////
 Route::get('/api/rooms', [RoomController::class, 'getAll']);
-Route::post('/capi/reate-room', [RoomController::class, 'create']);
+Route::post('/api/reate-room', [RoomController::class, 'create']);
 Route::get('/api/room/{room_id}', [RoomController::class, 'getById']);
 ////////////////
 
