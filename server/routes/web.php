@@ -55,7 +55,7 @@ Route::delete('/api/delete-session/{session_id}', [SessionController::class, 'de
 
 //ROOMS/////////////////
 Route::get('/api/rooms', [RoomController::class, 'getAll']);
-Route::post('/api/reate-room', [RoomController::class, 'create']);
+Route::post('/api/create-room', [RoomController::class, 'create']);
 Route::get('/api/room/{room_id}', [RoomController::class, 'getById']);
 ////////////////
 
