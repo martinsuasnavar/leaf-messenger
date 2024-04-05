@@ -18,20 +18,20 @@ use App\Http\Controllers\MessageController;
 
 
 //SESSIONS////////////////
-Route::get('/api/sessions', [SessionController::class, 'getAll']);
-Route::post('/api/create-session', [SessionController::class, 'create']);
-Route::delete('/api/delete-session/{session_id}', [SessionController::class, 'delete']);
+Route::get('/sessions', [SessionController::class, 'getAll']);
+Route::post('create-session', [SessionController::class, 'create']);
+Route::delete('/delete-session/{session_id}', [SessionController::class, 'delete']);
 ////////////////
 
 //ROOMS/////////////////
-Route::get('/api/rooms', [RoomController::class, 'getAll']);
-Route::post('/api/create-room', [RoomController::class, 'create']);
-Route::get('/api/room/{room_id}', [RoomController::class, 'getById']);
+Route::get('/rooms', [RoomController::class, 'getAll']);
+Route::post('/create-room', [RoomController::class, 'create']);
+Route::get('/room/{room_id}', [RoomController::class, 'getById']);
 ////////////////
 
 //USERS////////////////
-Route::get('/api/users', [UserController::class, 'getAll']);
-Route::post('/api/create-user', [UserController::class, 'create']);
+Route::get('/users', [UserController::class, 'getAll']);
+Route::post('/create-user', [UserController::class, 'create']);
 ////////////////
 
 
