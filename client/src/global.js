@@ -4,7 +4,7 @@ if (window.location.href.indexOf("localhost") > -1) {
     localHost = true;
 }
 
-const localPort = 5000;
+const localPort = 8000;
 
 let backendDomain = `https://leaf-messenger-server.vercel.app/api`;
 if (localHost){
