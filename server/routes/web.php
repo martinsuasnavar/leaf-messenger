@@ -40,6 +40,11 @@ Route::get('/check-database-connection', function () {
 //->users
 //->messages
 
+Route::get('/1', function () {
+    return '1';
+});
+
+
 //SESSIONS////////////////
 Route::get('/api/sessions', [SessionController::class, 'getAll']);
 Route::post('/api/create-session', [SessionController::class, 'create']);
