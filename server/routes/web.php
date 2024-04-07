@@ -41,33 +41,3 @@ Route::get('/check-database-connection', function () {
 //->rooms
 //->users
 //->messages
-
-Route::get('/1', function () {
-    return '1';
-});
-
-
-//SESSIONS////////////////
-Route::get('/api/sessions', [SessionController::class, 'getAll']);
-Route::post('/api/create-session', [SessionController::class, 'create']);
-Route::delete('/api/delete-session/{session_id}', [SessionController::class, 'delete']);
-////////////////
-
-//ROOMS/////////////////
-Route::get('/api/rooms', [RoomController::class, 'getAll']);
-Route::post('/api/create-room', [RoomController::class, 'create']);
-Route::get('/api/room/{room_id}', [RoomController::class, 'getById']);
-////////////////
-
-//USERS////////////////
-Route::get('/api/users', [UserController::class, 'getAll']);
-Route::post('/api/create-user', [UserController::class, 'create']);
-////////////////
-
-
-
-//MESSAGES////////////////
-Route::get('/messages', [MessageController::class, 'getAll']);
-Route::post('/create-message', [MessageController::class, 'create']);
-////////////////
-
