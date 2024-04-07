@@ -19,7 +19,7 @@ use App\Http\Controllers\MessageController;
 
 //SESSIONS////////////////
 Route::get('/sessions', [SessionController::class, 'getAll']);
-Route::post('create-session', [SessionController::class, 'create']);
+Route::post('/create-session', [SessionController::class, 'create']);
 Route::delete('/delete-session/{session_id}', [SessionController::class, 'delete']);
 ////////////////
 
