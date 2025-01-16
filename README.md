@@ -1,3 +1,3 @@
-# Installing Laravel
+# IMPORTANTE
 
-Install Composer (the equivalent of npm for JavaScript)
+Proyecto suspendido por tiempo indefinido, sin embargo, el código esta disponible para su inspección.
